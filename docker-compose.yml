@@ -1,0 +1,27 @@
+services:
+  backend:
+    build: ./backend
+    environment:
+      NV_DATA_DIR: /data
+      NV_CORS_ORIGINS: http://localhost:8080
+      NV_DEVICE: auto
+      NV_TRAINING_ENABLED: "true"
+    volumes:
+      - nv-data:/data          # mount datasets/ and checkpoints/ here
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: http://localhost:8000
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  nv-data:

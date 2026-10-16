@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design tokens: deep navy / slate / soft white with a restrained teal brand and a violet AI accent. */
+:root {
+  --bg: 244 246 249;
+  --surface: 255 255 255;
+  --raised: 248 250 252;
+  --line: 222 228 236;
+  --ink: 15 31 51;
+  --mute: 98 112 132;
+  --brand: 13 148 136;
+  --brand-ink: 255 255 255;
+  --ai: 109 91 224;
+  --ok: 22 138 82;
+  --warn: 180 110 8;
+  --bad: 200 50 60;
+  --navy: 15 39 66;
+  --shadow: 15 31 51;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: 14 22 36;
+  --surface: 21 32 50;
+  --raised: 27 40 61;
+  --line: 45 60 84;
+  --ink: 232 238 247;
+  --mute: 148 163 184;
+  --brand: 45 212 191;
+  --brand-ink: 6 24 34;
+  --ai: 167 139 250;
+  --ok: 74 210 140;
+  --warn: 240 176 64;
+  --bad: 248 113 113;
+  --navy: 10 17 30;
+  --shadow: 0 0 0;
+  color-scheme: dark;
+}
+
+html, body, #root { height: 100%; }
+body {
+  @apply bg-bg text-ink font-sans antialiased;
+  font-feature-settings: "cv11", "ss01";
+}
+:focus-visible { outline: 2px solid rgb(var(--ai)); outline-offset: 2px; border-radius: 4px; }
+* { scrollbar-color: rgb(var(--line)) transparent; }
+
+@layer components {
+  .card { @apply bg-surface border border-line rounded-card shadow-card; }
+  .card-pad { @apply p-5; }
+  .h-page { @apply text-2xl font-semibold tracking-tight; }
+  .h-sec { @apply text-sm font-semibold uppercase tracking-wider text-mute; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 h-10 text-sm font-medium transition-colors
+    disabled:opacity-50 disabled:cursor-not-allowed select-none; }
+  .btn-primary { @apply btn bg-brand text-brand-ink hover:opacity-90; }
+  .btn-secondary { @apply btn bg-raised text-ink border border-line hover:bg-line/40; }
+  .btn-ghost { @apply btn text-mute hover:text-ink hover:bg-line/40; }
+  .btn-danger { @apply btn bg-bad/10 text-bad border border-bad/30 hover:bg-bad/20; }
+  .btn-sm { @apply h-8 px-3 text-xs; }
+  .input { @apply h-10 rounded-lg bg-raised border border-line px-3 text-sm w-full text-ink placeholder:text-mute; }
+  .label { @apply text-xs font-medium text-mute mb-1 block; }
+  .num { @apply font-mono tabular-nums; }
+  .skeleton { @apply animate-pulse bg-line/60 rounded-md; }
+}
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+canvas.mri { image-rendering: pixelated; }

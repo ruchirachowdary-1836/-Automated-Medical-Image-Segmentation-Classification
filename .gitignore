@@ -1,0 +1,33 @@
+# secrets / env
+.env
+.env.*
+!.env.example
+
+# python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# node
+node_modules/
+frontend/dist/
+*.tsbuildinfo
+
+# runtime data: datasets, checkpoints, runs, uploaded or generated medical artifacts
+backend/var/
+var/
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.npz
+data/
+*.dcm
+
+# logs
+*.log
